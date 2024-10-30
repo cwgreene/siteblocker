@@ -1,5 +1,9 @@
 // Define the list of blocked URLs
-let blockedSites = []
+let blockedSites = [];// Load blocked sites from storage
+chrome.storage.local.get("blockedSites", (data) => {
+  let sites = data.blockedSites || [];
+  sites.forEach((x)=>blockedSites.push(x));
+});
 
 // Listen for web requests
 chrome.webRequest.onBeforeRequest.addListener(
